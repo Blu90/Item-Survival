@@ -11,17 +11,27 @@ public class PlayerMovement : MonoBehaviour
 	public float jumpHeight = 3f;
 	
 	public Transform groundCheck;
+	public Transform waterCheck;
 	public float groundDistance = 0.4f;
 	public LayerMask groundMask;
+	public LayerMask surfaceWaterMask;
+	public LayerMask deepWaterMask;
 	
 	Vector3 velocity;
 	bool isGrounded;
+	bool isSubmergedSurface;
+	bool isSubmergedDeep;
 	
 
     // Update is called once per frame
     void Update()
     {
 		isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+		isSubmergedSurface = Physics.CheckSphere(waterCheck.position, groundDistance, surfaceWaterMask);
+		isSubmergedDeep = Physics.CheckSphere(waterCheck.position, groundDistance, deepWaterMask);
+		
+		
+		
 		
 		if(isGrounded && velocity.y <0)
 		{
@@ -43,5 +53,16 @@ public class PlayerMovement : MonoBehaviour
 		velocity.y += gravity * Time.deltaTime;
 		
 		controller.Move(velocity * Time.deltaTime);
+		
+		if(isSubmergedSurface)
+		{
+			velocity.y = 1f;
+		}
+		
+		if(isSubmergedDeep)
+		{
+			velocity.y = 10f;
+		}
+		
     }
 }
