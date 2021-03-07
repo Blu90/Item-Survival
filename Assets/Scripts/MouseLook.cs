@@ -20,6 +20,16 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// I wrote this if-else code myself.
+		if (PauseMenu.GameIsPaused || MainMenu.OnMainMenu)
+		{
+			Cursor.lockState = CursorLockMode.None;
+		} else
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+		// Everything below this isn't mine anymore.
+		
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 		
