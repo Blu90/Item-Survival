@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 	bool isGrounded;
 	bool isSubmergedSurface;
 	bool isSubmergedDeep;
+	bool allowJump;
+	bool isSubmerged;
 	
 
     // Update is called once per frame
@@ -30,7 +32,13 @@ public class PlayerMovement : MonoBehaviour
 		isSubmergedSurface = Physics.CheckSphere(waterCheck.position, groundDistance, surfaceWaterMask);
 		isSubmergedDeep = Physics.CheckSphere(waterCheck.position, groundDistance, deepWaterMask);
 		
-		
+		if(isGrounded || isSubmergedDeep || isSubmergedSurface)
+		{
+			allowJump = true;
+		} else
+		{
+			allowJump = false;
+		}
 		
 		
 		if(isGrounded && velocity.y <0)
@@ -45,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 		
 		controller.Move(move * speed * Time.deltaTime);
 		
-		if(Input.GetButtonDown("Jump") && isGrounded)
+		if(Input.GetButtonDown("Jump") && allowJump)
 		{
 			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 		}
@@ -56,12 +64,13 @@ public class PlayerMovement : MonoBehaviour
 		
 		if(isSubmergedSurface)
 		{
+			gravity = 0f;
 			velocity.y = 1f;
 		}
 		
 		if(isSubmergedDeep)
 		{
-			velocity.y = 10f;
+			gravity = 5f;
 		}
 		
     }
