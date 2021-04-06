@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 	
 	public float speed = 12f;
 	public float gravity = -9.81f;
+	public float buoyancy = -0.1f * gravity;
+	public float deepBuoyancy = -1f * gravity;
 	public float jumpHeight = 3f;
 	
 	public Transform groundCheck;
@@ -21,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 	bool isGrounded;
 	bool isSubmergedSurface;
 	bool isSubmergedDeep;
-	bool allowJump;
 	bool isSubmerged;
 	
 
@@ -32,15 +33,10 @@ public class PlayerMovement : MonoBehaviour
 		isSubmergedSurface = Physics.CheckSphere(waterCheck.position, groundDistance, surfaceWaterMask);
 		isSubmergedDeep = Physics.CheckSphere(waterCheck.position, groundDistance, deepWaterMask);
 		
-		if(isGrounded || isSubmergedDeep || isSubmergedSurface)
-		{
-			allowJump = true;
-		} else
-		{
-			allowJump = false;
-		}
+
 		
 		
+		// Caps downward velocity when on ground.
 		if(isGrounded && velocity.y <0)
 		{
 			velocity.y = -2f;
@@ -53,25 +49,32 @@ public class PlayerMovement : MonoBehaviour
 		
 		controller.Move(move * speed * Time.deltaTime);
 		
-		if(Input.GetButtonDown("Jump") && allowJump)
+		if(Input.GetButtonDown("Jump"))
 		{
-			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			if (isSubmergedDeep || isSubmergedSurface)
+            {
+				velocity.y = Mathf.Sqrt(jumpHeight * 2f * buoyancy);
+			}
+			else if (isGrounded)
+			{
+				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			}
 		}
 		
 		velocity.y += gravity * Time.deltaTime;
 		
-		controller.Move(velocity * Time.deltaTime);
 		
 		if(isSubmergedSurface)
 		{
-			gravity = 0f;
 			velocity.y = 1f;
 		}
 		
 		if(isSubmergedDeep)
 		{
-			gravity = 5f;
+			velocity.y = 10f;
 		}
 		
+		controller.Move(velocity * Time.deltaTime);
+
     }
 }
