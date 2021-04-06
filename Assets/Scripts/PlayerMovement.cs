@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
 	
 	public float speed = 12f;
 	public float gravity = -9.81f;
-	public float buoyancy = -0.1f * gravity;
-	public float deepBuoyancy = -1f * gravity;
+	public float buoyancy = -0.981f;
+	public float deepBuoyancy = 9.81f;
 	public float jumpHeight = 3f;
 	
 	public Transform groundCheck;
