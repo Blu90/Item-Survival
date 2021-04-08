@@ -39,26 +39,46 @@ public class PlayerMovement : MonoBehaviour
 		move = transform.right * x + transform.forward * z;
 		controller.Move(move * speed * Time.deltaTime);
 		
-		if(Input.GetButtonDown("Jump") && isGrounded)
+		// physics for deep water
+		if(player.transform.position.y < deepWater.transform.position.y)
 		{
-			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			// check if player is holding jump button
+			if(Input.GetButton("Jump"))
+				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+			
+			// update velocity relative to gravity
+			velocity.y += -1f * gravity * Time.deltaTime;
+
 		}
-		else if(Input.GetButton("Jump"))
+		// physics for surface water
+		else if(player.transform.position.y < surfaceWater.transform.position.y)
 		{
-			if(player.transform.position.y < deepWater.transform.position.y)
-			{
-				velocity.y = Mathf.Sqrt(jumpHeight * -10f * gravity);
-			}
-			else if(player.transform.position.y < surfaceWater.transform.position.y)
+			// check if player is holding jump button
+			if(Input.GetButton("Jump") || velocity.y > Mathf.Sqrt(jumpHeight * -2f * gravity))
+				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+			
+			// update velocity relative to buoyancy
+			velocity.y += 0.2f * gravity * Time.deltaTime;
+
+			// possibly cap upward velocity here so you don't float increasingly faster up
+			// very bouncy at the moment but some tweaks could help
+		}
+		// physics for land
+		else
+		{
+			// check if jump first pressed on ground
+			if(Input.GetButtonDown("Jump") && isGrounded)
 			{
 				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 			}
-		}
 
-		// update velocity relative to gravity
-		velocity.y += gravity * Time.deltaTime;
+			// update velocity relative to gravity
+			velocity.y += gravity * Time.deltaTime;
+		}
 		
-		// Caps downward velocity when on ground.
+		// cap downward velocity when on ground
 		if(isGrounded && velocity.y <0)
 		{
 			velocity.y = -2f;
