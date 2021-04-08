@@ -859,6 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 516844200}
+  hunger: 100
 --- !u!114 &516844200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3429,6 +3430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 2071570451}
+  hunger: 100
 --- !u!114 &2071570451
 MonoBehaviour:
   m_ObjectHideFlags: 0
