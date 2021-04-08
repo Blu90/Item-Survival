@@ -36,15 +36,16 @@ public class HP : MonoBehaviour
 	healthBar.SetHealth(currentHealth);
 	}
 
-	void TakeHunger(int hungerTaken)
-    {
-		currentHunger -= hungerTaken;
-		hungerBar.SetHunger(currentHunger);
-    }
 
 	void Hungry()
 	{
 		TakeHunger(1);
 		Debug.Log("hunger subtracted");
+	}
+
+	void TakeHunger(int hungerTaken)
+	{
+		currentHunger -= hungerTaken;
+		hungerBar.SetHunger(currentHunger);
 	}
 }

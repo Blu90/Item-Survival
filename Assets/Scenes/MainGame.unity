@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43673998, g: 0.48435128, b: 0.5646032, a: 1}
+  m_IndirectSpecularColor: {r: 0.43673956, g: 0.48435092, b: 0.56460273, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 516844200}
-  hunger: 100
 --- !u!114 &516844200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,6 +2739,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 2071570450}
+  maxHunger: 100
+  currentHunger: 0
+  hungerBar: {fileID: 0}
 --- !u!850595691 &1505601853
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -3322,7 +3324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 2071570451}
-  hunger: 100
 --- !u!114 &2071570451
 MonoBehaviour:
   m_ObjectHideFlags: 0

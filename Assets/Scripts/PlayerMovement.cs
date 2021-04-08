@@ -42,11 +42,7 @@ public class PlayerMovement : MonoBehaviour
 		// physics for deep water
 		if(player.transform.position.y < deepWater.transform.position.y)
 		{
-			// check if player is holding jump button
-			if(Input.GetButton("Jump"))
-				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
-			
 			// update velocity relative to gravity
 			velocity.y += -1f * gravity * Time.deltaTime;
 
@@ -58,9 +54,12 @@ public class PlayerMovement : MonoBehaviour
 			if(Input.GetButton("Jump") || velocity.y > Mathf.Sqrt(jumpHeight * -2f * gravity))
 				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
-			
+			// TODO: Add sinking by pressing Ctrl. Will be the opposite effect compared to pressing space.
+            // TODO: Add maintain position by pressing both Ctrl and Space. Will counteract the water's natural upward force.			
+
+
 			// update velocity relative to buoyancy
-			velocity.y += 0.2f * gravity * Time.deltaTime;
+			velocity.y += -0.05f * gravity * Time.deltaTime;
 
 			// possibly cap upward velocity here so you don't float increasingly faster up
 			// very bouncy at the moment but some tweaks could help
