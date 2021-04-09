@@ -30,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		
+		if (DeathMenu.YouAreDead) return;
+
 		bool isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 		
         float x = Input.GetAxis("Horizontal");
