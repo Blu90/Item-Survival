@@ -2741,7 +2741,7 @@ MonoBehaviour:
   healthBar: {fileID: 2071570450}
   maxHunger: 100
   currentHunger: 0
-  hungerBar: {fileID: 0}
+  hungerBar: {fileID: 516844199}
 --- !u!850595691 &1505601853
 LightingSettings:
   m_ObjectHideFlags: 0

@@ -16,8 +16,10 @@ public class HP : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+		currentHunger = maxHunger;
 		healthBar.SetMaxHealth(maxHealth);
-		InvokeRepeating("Hungry", 0f, 30f);
+		hungerBar.SetMaxHunger(maxHunger);
+		InvokeRepeating("Hungry", 30f, 30f);
 	}
 
     // Update is called once per frame
@@ -39,8 +41,16 @@ public class HP : MonoBehaviour
 
 	void Hungry()
 	{
-		TakeHunger(1);
-		Debug.Log("hunger subtracted");
+		if(currentHunger > 1)
+		{
+			TakeHunger(1);
+			Debug.Log("hunger subtracted");
+			hungerBar.SetHunger(currentHunger);
+		} else
+        {
+			TakeDamage(1);
+			Debug.Log("health subtracted");
+        }
 	}
 
 	void TakeHunger(int hungerTaken)
