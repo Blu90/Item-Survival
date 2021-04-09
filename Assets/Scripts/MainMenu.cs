@@ -11,8 +11,9 @@ public static bool OnMainMenu = true;
 public void PlayGame ()
 {
 	SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-	// This line below is for development purposes. It serves no purpose in game.
+	// The lines below is for development purposes. It serves no purpose in game.
 	OnMainMenu = false;
+	DeathMenu.YouAreDead = false;
 }
 public void QuitGame ()
 {

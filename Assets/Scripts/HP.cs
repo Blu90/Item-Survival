@@ -11,6 +11,7 @@ public class HP : MonoBehaviour
 	public int maxHunger = 100;
 	public int currentHunger;
 	public HealthBar hungerBar;
+	public static bool Death = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,12 @@ public class HP : MonoBehaviour
 		{
 			TakeDamage(100);
 		}
-        
+        if (currentHealth < 1)
+        {
+			currentHealth = 100;
+			Death = true;
+			Debug.Log("dead");
+        }
     }
 	
 	void TakeDamage(int damage)

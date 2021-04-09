@@ -22,7 +22,7 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
 		// I wrote this if-else code myself.
-		if (PauseMenu.GameIsPaused || MainMenu.OnMainMenu)
+		if (PauseMenu.GameIsPaused || MainMenu.OnMainMenu || DeathMenu.YouAreDead)
 		{
 			Cursor.lockState = CursorLockMode.None;
 		} else

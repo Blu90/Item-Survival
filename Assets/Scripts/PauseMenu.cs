@@ -14,7 +14,11 @@ public GameObject pauseMenuUI;
     {
        if (Input.GetKeyDown(KeyCode.Escape))
 	   {
-		   if (GameIsPaused)
+			if (DeathMenu.YouAreDead)
+            {
+				LoadMenu();
+            }
+		   else if (GameIsPaused)
 		   {
 			   Resume();
 		   } else
@@ -40,9 +44,9 @@ public GameObject pauseMenuUI;
 	public void LoadMenu()
 	{
 		Time.timeScale = 1f;
-		SceneManager.LoadScene("MainMenu");
 		GameIsPaused = false;
 		MainMenu.OnMainMenu = true;
+		SceneManager.LoadScene("MainMenu");
 	}
 	public void QuitGame()
 	{
