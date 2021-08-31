@@ -11,6 +11,13 @@ public class HP : MonoBehaviour
 	public int maxHunger = 100;
 	public int currentHunger;
 	public HealthBar hungerBar;
+	public int maxOxygen = 100;
+	public int currentOxygen;
+	public HealthBar oxygenBar;
+	public int maxSwim = 100;
+	public int currentSwim;
+	public HealthBar swimBar;
+	public static bool isSwimming = false;
 	public static bool Death = false;
 
     // Start is called before the first frame update
@@ -18,8 +25,12 @@ public class HP : MonoBehaviour
     {
         currentHealth = maxHealth;
 		currentHunger = maxHunger;
+		currentOxygen = maxOxygen;
+		currentSwim = maxSwim;
 		healthBar.SetMaxHealth(maxHealth);
 		hungerBar.SetMaxHunger(maxHunger);
+		oxygenBar.SetMaxOxygen(maxOxygen);
+		swimBar.SetMaxSwim(maxSwim);
 		InvokeRepeating("Hungry", 6f, 6f);
 	}
 
@@ -36,6 +47,7 @@ public class HP : MonoBehaviour
 			Death = true;
 			Debug.Log("dead");
         }
+
     }
 	
 	void TakeDamage(int damage)
@@ -57,6 +69,18 @@ public class HP : MonoBehaviour
 			TakeDamage(1);
 			Debug.Log("health subtracted");
         }
+	}
+
+	void TakeOxygen(int oxygenTaken)
+    {
+		currentOxygen -= oxygenTaken;
+		oxygenBar.SetOxygen(currentOxygen);
+    }
+
+	void TakeSwim(int swimTaken)
+	{
+		currentSwim -= swimTaken;
+		swimBar.SetSwim(currentSwim);
 	}
 
 	void TakeHunger(int hungerTaken)

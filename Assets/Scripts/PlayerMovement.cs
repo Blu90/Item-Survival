@@ -46,16 +46,18 @@ public class PlayerMovement : MonoBehaviour
 
 			// update velocity relative to gravity
 			velocity.y += -1f * gravity * Time.deltaTime;
+			//Check for the swim bar.
+			HP.isSwimming = true;
 
 		}
 		// physics for surface water
 		else if(player.transform.position.y < surfaceWater.transform.position.y)
 		{
-			
-
+			//Check for the swim bar.
+			HP.isSwimming = true;
 
 			// check if player is holding jump button
-			if(Input.GetButton("Jump") || velocity.y > Mathf.Sqrt(jumpHeight * -2f * gravity))
+			if (Input.GetButton("Jump") || velocity.y > Mathf.Sqrt(jumpHeight * -2f * gravity))
 				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
 			// TODO: Add sinking by pressing Ctrl. Will be the opposite effect compared to pressing space.
@@ -77,6 +79,9 @@ public class PlayerMovement : MonoBehaviour
 		// physics for land
 		else
 		{
+			//Check for the swim bar.
+			HP.isSwimming = false;
+
 			// check if jump first pressed on ground
 			if(Input.GetButtonDown("Jump") && isGrounded)
 			{

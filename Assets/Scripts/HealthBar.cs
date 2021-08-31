@@ -29,4 +29,26 @@ public void SetMaxHealth(int health)
 	{
 		slider.value = hunger;
 	}
+
+	public void SetMaxOxygen(int oxygen)
+	{
+		slider.maxValue = oxygen;
+		slider.value = oxygen;
+	}
+
+	public void SetOxygen(int oxygen)
+	{
+		slider.value = oxygen;
+	}
+
+	public void SetMaxSwim(int swim)
+	{
+		slider.maxValue = swim;
+		slider.value = swim;
+	}
+
+	public void SetSwim(int swim)
+	{
+		slider.value = swim;
+	}
 }
