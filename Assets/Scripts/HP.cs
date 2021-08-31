@@ -20,7 +20,7 @@ public class HP : MonoBehaviour
 		currentHunger = maxHunger;
 		healthBar.SetMaxHealth(maxHealth);
 		hungerBar.SetMaxHunger(maxHunger);
-		InvokeRepeating("Hungry", 30f, 30f);
+		InvokeRepeating("Hungry", 6f, 6f);
 	}
 
     // Update is called once per frame

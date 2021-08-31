@@ -51,12 +51,21 @@ public class PlayerMovement : MonoBehaviour
 		// physics for surface water
 		else if(player.transform.position.y < surfaceWater.transform.position.y)
 		{
+			
+
+
 			// check if player is holding jump button
 			if(Input.GetButton("Jump") || velocity.y > Mathf.Sqrt(jumpHeight * -2f * gravity))
 				velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
 			// TODO: Add sinking by pressing Ctrl. Will be the opposite effect compared to pressing space.
-            // TODO: Add maintain position by pressing both Ctrl and Space. Will counteract the water's natural upward force.			
+			// Noah: "Feel free to change this in any way you see fit. For now I'm doing a copy-paste maneuver to get this working."
+
+			if (Input.GetKeyDown(KeyCode.LeftControl) || velocity.y < -9.8f)
+				velocity.y = -9.8f;
+
+			// TODO: Add maintain position by pressing both Ctrl and Space. Will counteract the water's natural upward force.	
+            // Noah: "I tried and this one is too hard."		
 
 
 			// update velocity relative to buoyancy

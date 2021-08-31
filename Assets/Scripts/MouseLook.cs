@@ -25,10 +25,13 @@ public class MouseLook : MonoBehaviour
 		if (PauseMenu.GameIsPaused || MainMenu.OnMainMenu || DeathMenu.YouAreDead)
 		{
 			Cursor.lockState = CursorLockMode.None;
+			// Debug.Log("mouseunlocked");
 		} else
 		{
 			Cursor.lockState = CursorLockMode.Locked;
 		}
+
+
 		// Everything below this isn't mine anymore.
 		
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
